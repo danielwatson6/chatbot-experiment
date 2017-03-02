@@ -1,0 +1,31 @@
+@import "vendor/bootstrap/scss/bootstrap";
+
+@font-face {
+  font-family: "monofur";
+  src: url("/fonts/monofur.ttf") format("truetype");
+}
+
+html {
+  // Footer
+  position: relative;
+  min-height: 100%;
+}
+
+$footer-height: 60px;
+
+body {
+  margin-bottom: $footer-height;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: $footer-height;
+  line-height: $footer-height; // Vertically center the text
+  background-color: #f5f5f5;
+  z-index: 1;
+  a {
+    color: #6c7479;
+  }
+}
