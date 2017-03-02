@@ -3,7 +3,9 @@ import { Router } from 'meteor/iron:router'
 import nlp from './nlp'
 
 
-Router.plugin('dataNotFound', {notFoundTemplate: 'notFound'})
+Router.configure({
+  notFoundTemplate: 'notFound'
+})
 
 Router.route('/nlp', function () {
   const res = this.response

@@ -25,3 +25,5 @@ meteorhacks:fast-render
 session
 iron:router
 mquandalle:jade
+fortawesome:fontawesome
+http

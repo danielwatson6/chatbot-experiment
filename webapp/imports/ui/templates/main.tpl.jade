@@ -1,5 +1,9 @@
 body
-  h1 Hello World
+  #bubbles.container
   footer.footer
     .container
-      span.text-muted Made by Daniel Watson
+      .input-group
+        input#user-input.form-control(type="text" placeholder="Write here...")
+        span.input-group-btn
+          button#user-input-btn.btn.btn-secondary(type="button")
+            span.fa.fa-send

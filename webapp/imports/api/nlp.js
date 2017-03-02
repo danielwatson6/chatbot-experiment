@@ -1,5 +1,7 @@
 import nlp from 'compromise'
 
 export default (txt) => {
-  return txt
+  
+  // Handle all NLP here
+  return txt + ' :)'
 }
