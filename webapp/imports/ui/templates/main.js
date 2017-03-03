@@ -11,8 +11,11 @@ const handleUserInput = () => {
   const txt = inputField.val()
   if (txt) {
     pushBubble(txt)
-    HTTP.call('GET', '/nlp', {params: {txt} }, (err, res) => {
-      pushBubble(res.content, true)
+    const ctx = Session.get('conversationContext')
+    HTTP.call('GET', '/nlp', {params: {txt, ctx} }, (err, res) => {
+      const result = JSON.parse(res.content)
+      Session.set('conversationContext', result.context)
+      pushBubble(result.output.text[0], true)
     })
   }
   // Clear input field

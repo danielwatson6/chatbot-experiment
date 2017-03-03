@@ -8,10 +8,16 @@ const conversation = new ConversationV1({
   version_date: '2017-03-03'
 })
 
-export default (text) => {
+export default (text, context) => {
   return new Promise((resolve, reject) => {
-    conversation.message({ input: {text} }, (err, response) => {
-      resolve(response.output.text[0])
+    const messageParams = { input: {text} }
+    // AJAX stringifies undefined contexts
+    if (context && context !== 'undefined')
+      messageParams['context'] = context
+    conversation.message(messageParams, (err, response) => {
+      if (err)
+        console.log(err)
+      resolve(response)
     })
   })
 }
