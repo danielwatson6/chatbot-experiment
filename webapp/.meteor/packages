@@ -27,3 +27,4 @@ iron:router
 mquandalle:jade
 fortawesome:fontawesome
 http
+peerlibrary:fs

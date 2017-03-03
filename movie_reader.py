@@ -31,5 +31,5 @@ relevant_df = df[[
   'imdb_score',
 ]]
 
-with open('tensorflow/data/movie_metadata.json', 'w') as f:
+with open('webapp/server/movie_metadata.json', 'w') as f:
   f.write(relevant_df.reset_index().to_json(orient='records'))
