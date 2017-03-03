@@ -10,7 +10,9 @@ Router.configure({
 Router.route('/nlp', function () {
   const res = this.response
   res.writeHead(200, {'Content-Type': 'text/plain'})
-  res.end(nlp(this.request.query.txt))
+  nlp(this.request.query.txt).then((response) => {
+    res.end(response)
+  })
 }, {where: 'server'})
 
 Router.route('/', function () {

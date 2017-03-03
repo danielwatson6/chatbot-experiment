@@ -15,12 +15,15 @@ const handleUserInput = () => {
       pushBubble(res.content, true)
     })
   }
+  // Clear input field
   inputField.val('')
 }
 
 const pushBubble = (txt, isReply=false) => {
   Blaze.renderWithData(Template['bubble'], {txt, isReply},
     document.getElementById('bubbles'))
+  // Scroll to bottom of the page
+  window.scrollTo(0, document.body.scrollHeight)
 }
 
 Template.main.events({
