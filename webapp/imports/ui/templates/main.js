@@ -13,9 +13,32 @@ const handleUserInput = () => {
     pushBubble(txt)
     const ctx = Session.get('conversationContext')
     HTTP.call('GET', '/nlp', {params: {txt, ctx} }, (err, res) => {
-      const result = JSON.parse(res.content)
-      Session.set('conversationContext', result.context)
-      pushBubble(result.output.text[0], true)
+      (new Promise((resolve, reject) => {
+        const result = JSON.parse(res.content)
+        
+        // If Watson cannot handle the message, use the deep learning API
+        if (result.err) {
+          const tfURL = 'http://127.0.0.1:5000/?txt=' + encodeURIComponent(txt)
+          
+          // CORS request required - hacky
+          var xhr = new XMLHttpRequest()
+          xhr.open('GET', tfURL, true)
+          xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4) {
+              resolve(JSON.parse(xhr.response).txt)
+            }
+          }
+          xhr.send(null)
+        }
+        
+        // Store the context to resend to Watson
+        else {
+          Session.set('conversationContext', result.ctx)
+          reslove(result.txt)
+        }
+      })).then((txt) => {
+        pushBubble(txt, true)
+      })
     })
   }
   // Clear input field
