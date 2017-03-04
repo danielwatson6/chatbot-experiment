@@ -13,7 +13,7 @@ def get_id2line():
 
 def get_conversations():
     conv_lines = open('data/movie_conversations.txt').read().split('\n')
-    convs = [ ]
+    convs = []
     for line in conv_lines[:-1]:
         _line = line.split(' +++$+++ ')[-1][1:-1].replace("'","").replace(" ","")
         convs.append(_line.split(','))
@@ -68,7 +68,7 @@ def prepare_seq2seq_files(questions, answers, path='output/',
         else:
             train_enc.write(questions[i]+'\n')
             train_dec.write(answers[i]+ '\n' )
-        if i%10000 == 0:
+        if i % 10000 == 0:
             print '\n>> written %d lines' %(i) 
 
     # close files
@@ -85,4 +85,4 @@ print '>> gathered conversations.\n'
 questions, answers = gather_dataset(convs,id2line)
 print questions[:2]
 print '>> gathered questions and answers.\n'
-prepare_seq2seq_files(questions,answers)
+prepare_seq2seq_files(questions, answers)
