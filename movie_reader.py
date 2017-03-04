@@ -31,5 +31,22 @@ relevant_df = df[[
   'imdb_score',
 ]]
 
-with open('webapp/server/movie_metadata.json', 'w') as f:
+with open('webapp/public/movie_metadata.json', 'w') as f:
   f.write(relevant_df.reset_index().to_json(orient='records'))
+
+ibm_output = ''
+
+for prop in ['director_name', 'movie_title', 'actors', 'plot_keywords']:
+  for _, row in relevant_df[[prop]].iterrows():
+    row = row[prop]
+    try:
+      if type(row) == list:
+        for r in row:
+          ibm_output += '{0},{1}\n'.format(prop, r)
+      else:
+        ibm_output += '{0},{1}\n'.format(prop, row)
+    except:
+      pass
+
+with open('webapp/public/ibm_data.csv', 'w') as f:
+  f.write(ibm_output)
