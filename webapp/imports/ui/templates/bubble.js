@@ -13,3 +13,13 @@ Template.bubble.onRendered(function () {
     this.$('.filler').addClass('pull-xs-6')
   }
 })
+
+Template.bubble.helpers({
+  moviesFound() {
+    return this.movies.length > 0
+  },
+  renderMovies() {
+    return JSON.stringify(this.movies)
+  },
+})
+
