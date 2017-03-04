@@ -2,6 +2,7 @@ node_modules/
 *.pyc
 .DS_Store
 public/
+output/
 data/
 Icon?
 movie_metadata.json
